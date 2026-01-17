@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggerAspect {
 
-    @Pointcut("within(com.codesnippet.Aspects.controller.HelloController)")
+    @Pointcut("@within(org.springframework.web.bind.annotation.RestController)")
     public void controllerPointcut() {}
 
     @Around("controllerPointcut()")

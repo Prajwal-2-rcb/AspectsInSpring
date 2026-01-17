@@ -1,5 +1,7 @@
 package com.codesnippet.Aspects.aspect;
 
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
@@ -8,9 +10,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggerAspect {
 
-    @Before("execution(* com.codesnippet.Aspects.controller.HelloController.sayHello(..))")
-    public void log()
+    @Around("execution(* com.codesnippet.Aspects.controller.*.*(..))")
+    public Object log(ProceedingJoinPoint joinPoint) throws Throwable
     {
         System.out.println("Aspect log called");
+        Object result = joinPoint.proceed();
+        System.out.println("Aspect log executed");
+        return result;
     }
 }
